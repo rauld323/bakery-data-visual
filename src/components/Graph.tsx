@@ -1,6 +1,7 @@
 import { scaleBand, scaleLinear } from "d3";
 import React, { FC } from "react";
 import Button from "./Button";
+import { FilteredObject } from "./DataView";
 import { Bars } from "./GraphComponents/Bars";
 import { AxisBottom } from "./GraphComponents/BottomAxis";
 import { GraphPlots } from "./GraphComponents/GraphPlots";
@@ -8,7 +9,7 @@ import { AxisLeft } from "./GraphComponents/LeftAxis";
 import Legend from "./Legend";
 
 interface IProps {
-  data: any[];
+  data: FilteredObject[];
   toggleComponent: () => void;
 }
 

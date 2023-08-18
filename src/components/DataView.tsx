@@ -5,7 +5,7 @@ import { groupAndSumByProperty } from "../helpers/groupAndSumProperty";
 import Frame from "./Frame";
 import Graph from "./Graph";
 import Selector from "./Selector";
-import Table, { AllCombinedProps } from "./Table";
+import Table from "./Table";
 import "./Table.css";
 
 export interface DeliveryObject {
@@ -13,7 +13,6 @@ export interface DeliveryObject {
   id_store: number;
   id_product: number;
   delivery_qty?: number;
-  delivery_value_by_price: number;
 }
 
 export interface RecomendationObject {
@@ -21,7 +20,6 @@ export interface RecomendationObject {
   id_store: number;
   id_product: number;
   recommendation: number;
-  recommendation_value_by_price: number;
 }
 
 export interface SalesObject {
@@ -29,21 +27,18 @@ export interface SalesObject {
   demand_value: number;
   id_product: number;
   id_store: number;
-  sales_qty: number;
-  sales_value: number;
   target_date: string;
 }
 
 export interface FilteredObject {
+  index: number;
   delivery_qty: number;
-  delivery_value_by_price: number;
   demand_qty: number;
   demand_value: number;
   id_product: number;
   id_store: number;
-  sales_qty: number;
-  sales_value: number;
   target_date: string;
+  recommendation: number;
 }
 
 export interface IProps {
@@ -61,24 +56,27 @@ const DataView: FC<IProps> = ({ deliveries, recommendations, sales }) => {
   const toggleComponent = () => {
     setShowTableComponent(!showTableComponent);
   };
-  const bartArray = combineObjectsByMatchingKeys(deliveries, recommendations);
+  const deliveryAndRecommendation = combineObjectsByMatchingKeys(
+    deliveries,
+    recommendations
+  );
 
-  const salesAndBartArray: AllCombinedProps[] = combineObjectsByMatchingKeys(
-    bartArray,
+  const combinedFilteredData: FilteredObject[] = combineObjectsByMatchingKeys(
+    deliveryAndRecommendation,
     sales
   );
 
   const uniqueDates = Array.from(
-    new Set(salesAndBartArray.map((date) => date.target_date))
+    new Set(combinedFilteredData.map((date) => date.target_date))
   );
   const uniqueStores = Array.from(
-    new Set(salesAndBartArray.map((store) => store.id_store))
+    new Set(combinedFilteredData.map((store) => store.id_store))
   );
   const uniqueProducts = Array.from(
-    new Set(salesAndBartArray.map((product) => product.id_product))
+    new Set(combinedFilteredData.map((product) => product.id_product))
   );
 
-  const filteredDeliveries = salesAndBartArray.filter((item) => {
+  const filteredDeliveries = combinedFilteredData.filter((item) => {
     const matchesDate = !selectedDate || item.target_date === selectedDate;
 
     const matchesStore =
@@ -90,8 +88,6 @@ const DataView: FC<IProps> = ({ deliveries, recommendations, sales }) => {
     return matchesStore && matchesProduct && matchesDate;
   });
 
-  console.log(filteredDeliveries);
-  console.log(sales);
   return (
     <>
       <div

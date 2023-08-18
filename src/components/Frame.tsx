@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
 
 interface IProps {
-  children: any;
+  children: ReactElement;
 }
 
 const Frame: FC<IProps> = ({ children }) => {

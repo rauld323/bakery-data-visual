@@ -1,4 +1,5 @@
 import { FC } from "react";
+import "./Button.css";
 
 interface IProps {
   onClickAction?: () => void;
@@ -6,26 +7,7 @@ interface IProps {
 }
 
 const Button: FC<IProps> = ({ onClickAction, text }) => {
-  return (
-    <button
-      onClick={onClickAction}
-      style={{
-        border: "none",
-        height: "50px",
-        width: "200px",
-        backgroundColor: "#22313E",
-        cursor: "pointer",
-        fontSize: "1.3em",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: "10px",
-        margin: "30px 0",
-        color: "white",
-      }}
-    >
-      {text}
-    </button>
-  );
+  return <button onClick={onClickAction}>{text}</button>;
 };
 
 export default Button;

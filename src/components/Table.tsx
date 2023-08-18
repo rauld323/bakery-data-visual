@@ -5,23 +5,10 @@ import { findClosestNumber } from "../helpers/findClosestNumber";
 import { format, parse } from "date-fns";
 import "./Table.css";
 import Button from "./Button";
-
-export interface AllCombinedProps {
-  delivery_qty: number;
-  delivery_value_by_price: number;
-  demand_qty: number;
-  demand_value: number;
-  id_product: number;
-  id_store: number;
-  sales_qty: number;
-  sales_value: number;
-  target_date: string;
-  recommendation: number;
-  recommendation_value_by_price: number;
-}
+import { FilteredObject } from "./DataView";
 
 interface IProps {
-  filteredDeliveries: AllCombinedProps[];
+  filteredDeliveries: FilteredObject[];
   toggleComponent: () => void;
 }
 

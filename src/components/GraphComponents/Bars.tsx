@@ -1,8 +1,9 @@
+import { FilteredObject } from "../DataView";
 import { AxisBottomProps } from "./BottomAxis";
 import { AxisLeftProps } from "./LeftAxis";
 
 interface BarsProps {
-  data: any[];
+  data: FilteredObject[];
   height: number;
   scaleX: AxisBottomProps["scale"];
   scaleY: AxisLeftProps["scale"];

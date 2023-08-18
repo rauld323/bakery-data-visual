@@ -37,14 +37,6 @@ export function GraphPlots({
             fill={color}
             height={height - scaleY(plotValue)}
           />
-          {/* <line
-            key={index}
-            x1={scaleX(target_date)! + scaleX.bandwidth()}
-            y1={scaleY(plotValue)}
-            x2={scaleX(target_date)! + scaleX.bandwidth() / plotLocation}
-            y2={scaleY(plotValue)}
-            stroke={color}
-          /> */}
         </>
       )}
     </>

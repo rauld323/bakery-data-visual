@@ -1,11 +1,14 @@
-import { DeliveryObject } from "../components/DataView";
+import {
+  DeliveryObject,
+  RecomendationObject,
+  SalesObject,
+} from "../components/DataView";
 
 export function combineObjectsByMatchingKeys(
   arr1: DeliveryObject[],
-  arr2: any[]
+  arr2: RecomendationObject[] | SalesObject[]
 ) {
   const combinedArray = [];
-  console.log(typeof arr2);
   const mapArray2 = new Map();
   for (const obj2 of arr2) {
     const key = `${obj2.target_date}-${obj2.id_store}-${obj2.id_product}`;
