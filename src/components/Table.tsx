@@ -4,6 +4,7 @@ import { getStoreName } from "../enums/storeNames";
 import { findClosestNumber } from "../helpers/findClosestNumber";
 import { format, parse } from "date-fns";
 import "./Table.css";
+import Button from "./Button";
 
 export interface AllCombinedProps {
   delivery_qty: number;
@@ -79,30 +80,12 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
           <div className="table-cell">Recomm...</div>
           <div className="table-cell">Delivery</div>
           <div className="table-cell">Demand</div>
-          <div className="table-cell">Demand</div>
+          <div className="table-cell">Forecast Tendency</div>
         </div>
 
         {filteredDeliveries.length !== 0 ? displayTableData() : noDataMessage()}
       </div>
-      <button
-        style={{
-          display: "flex",
-          border: "none",
-          height: "50px",
-          width: "200px",
-          backgroundColor: "#22313E",
-          cursor: "pointer",
-          fontSize: "1.3em",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: "10px",
-          margin: "30px 0",
-          color: "white",
-        }}
-        onClick={toggleComponent}
-      >
-        Graph
-      </button>
+      <Button onClickAction={toggleComponent} text={"Graph"} />
     </>
   );
 };

@@ -1,5 +1,6 @@
 import { scaleBand, scaleLinear } from "d3";
 import React, { FC } from "react";
+import Button from "./Button";
 import { Bars } from "./GraphComponents/Bars";
 import { AxisBottom } from "./GraphComponents/BottomAxis";
 import { GraphPlots } from "./GraphComponents/GraphPlots";
@@ -24,8 +25,16 @@ const Graph: FC<IProps> = ({ toggleComponent, data }) => {
     .domain([0, Math.max(...data.map(({ demand_qty }) => demand_qty))])
     .range([height, 0]);
 
-  return (
-    <div style={{ overflow: "auto", width: "100%" }}>
+  const noDataMessage = () => {
+    return (
+      <div style={{ paddingTop: "80px" }}>
+        <h1>Sorry, there is no data for that query!</h1>
+      </div>
+    );
+  };
+
+  const svgGraph = () => {
+    return (
       <svg
         width={width + margin.left + margin.right}
         height={height + margin.top + margin.bottom}
@@ -62,6 +71,12 @@ const Graph: FC<IProps> = ({ toggleComponent, data }) => {
           ))}
         </g>
       </svg>
+    );
+  };
+
+  return (
+    <div style={{ overflow: "auto", width: "100%" }}>
+      {data.length !== 0 ? svgGraph() : noDataMessage()}
       <div
         style={{
           display: "flex",
@@ -71,24 +86,7 @@ const Graph: FC<IProps> = ({ toggleComponent, data }) => {
         }}
       >
         <Legend />
-        <button
-          onClick={toggleComponent}
-          style={{
-            border: "none",
-            height: "50px",
-            width: "200px",
-            backgroundColor: "#22313E",
-            cursor: "pointer",
-            fontSize: "1.3em",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: "10px",
-            margin: "30px 0",
-            color: "white",
-          }}
-        >
-          Table
-        </button>
+        <Button onClickAction={toggleComponent} text={"Table"} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { returnZeroIfEmpty } from "./isEmpty";
+import { isEmpty, returnZeroIfEmpty } from "./isEmpty";
 
 export function findClosestNumber(
   delivery: number,
@@ -10,8 +10,9 @@ export function findClosestNumber(
     returnZeroIfEmpty(recommendation) - demand
   );
 
-  console.log(deliveryDistance, recommendationDistance);
-  if (deliveryDistance < recommendationDistance) {
+  if (isEmpty(recommendation)) {
+    return "N/A";
+  } else if (deliveryDistance < recommendationDistance) {
     return "Improved";
   } else if (deliveryDistance > recommendationDistance) {
     return "Deteriorated";

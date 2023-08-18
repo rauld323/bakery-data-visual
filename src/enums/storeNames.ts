@@ -9,10 +9,10 @@ export function getStoreName(
 ): string[] | number[] | string {
   switch (storeName) {
     case StoreName["Store Three"]:
-      return "Store Three";
+      return "Three";
     case StoreName["Store Six"]:
-      return "Store Six";
+      return "Six";
     default:
-      return "Store Nine";
+      return "Nine";
   }
 }
