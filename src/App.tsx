@@ -1,9 +1,9 @@
 import "./App.css";
 import React, { createContext } from "react";
 import DataView from "./components/DataView";
-import deliveries from "./data/deliveries.json";
-import recommendations from "./data/recommendations.json";
-import sales from "./data/sales.json";
+import deliveries from "../src/data/deliveries.json";
+import recommendations from "../src/data/recommendations.json";
+import sales from "../src/data/sales.json";
 
 export const BakeryContext = createContext({});
 

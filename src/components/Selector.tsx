@@ -3,7 +3,7 @@ import React, { FC } from "react";
 interface IProps {
   label: string;
   value: string | number;
-  uniqueItem: string[] | number[];
+  uniqueItem: number[] | string[];
   onChange?: (e: any) => void;
 }
 

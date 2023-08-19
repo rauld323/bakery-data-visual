@@ -1,16 +1,14 @@
-export enum StoreName {
-  "Store Three" = 100790000,
-  "Store Six" = 100790001,
-  "Store Nine" = 100790002,
+enum StoreName {
+  STORE_THREE = 100790000,
+  STORE_SIX = 100790001,
+  STORE_NINE = 100790002,
 }
 
-export function getStoreName(
-  storeName: StoreName
-): string[] | number[] | string {
+export function getStoreName(storeName: StoreName): string | number {
   switch (storeName) {
-    case StoreName["Store Three"]:
+    case StoreName.STORE_THREE:
       return "Three";
-    case StoreName["Store Six"]:
+    case StoreName.STORE_SIX:
       return "Six";
     default:
       return "Nine";
