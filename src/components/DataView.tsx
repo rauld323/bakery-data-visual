@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { FC } from "react";
 import { combineObjectsByMatchingKeys } from "../helpers/combineArrays";
 import { groupAndSumByProperty } from "../helpers/groupAndSumProperty";
@@ -54,8 +54,9 @@ const DataView: FC<IProps> = ({ deliveries, recommendations, sales }) => {
   const [showTableComponent, setShowTableComponent] = useState(true);
 
   const toggleComponent = () => {
-    setShowTableComponent(!showTableComponent);
+    setShowTableComponent((prevShowTableComponent) => !prevShowTableComponent);
   };
+
   const deliveryAndRecommendation = combineObjectsByMatchingKeys(
     deliveries,
     recommendations
@@ -66,14 +67,24 @@ const DataView: FC<IProps> = ({ deliveries, recommendations, sales }) => {
     sales
   );
 
-  const uniqueDates = Array.from(
-    new Set(combinedFilteredData.map((date) => date.target_date))
+  const uniqueDates = useMemo(
+    () =>
+      Array.from(new Set(combinedFilteredData.map((date) => date.target_date))),
+    [combinedFilteredData]
   );
-  const uniqueStores = Array.from(
-    new Set(combinedFilteredData.map((store) => store.id_store))
+
+  const uniqueStores = useMemo(
+    () =>
+      Array.from(new Set(combinedFilteredData.map((store) => store.id_store))),
+    [combinedFilteredData]
   );
-  const uniqueProducts = Array.from(
-    new Set(combinedFilteredData.map((product) => product.id_product))
+
+  const uniqueProducts = useMemo(
+    () =>
+      Array.from(
+        new Set(combinedFilteredData.map((product) => product.id_product))
+      ),
+    [combinedFilteredData]
   );
 
   const filteredDeliveries = combinedFilteredData.filter((item) => {
