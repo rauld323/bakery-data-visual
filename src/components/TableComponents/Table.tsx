@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { format, parse } from "date-fns";
 import "./Table.css";
-import { getProductNames } from "../../enums/productNames";
-import { getStoreName } from "../../enums/storeNames";
+import { getProductNames } from "../../Enums/productNames";
+import { getStoreName } from "../../Enums/storeNames";
 import { findClosestNumber } from "../../helpers/findClosestNumber";
 import Button from "../Button";
 import { FilteredObject } from "../DataView";

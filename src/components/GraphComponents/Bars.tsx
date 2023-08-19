@@ -1,6 +1,7 @@
 import { FilteredObject } from "../DataView";
 import { AxisBottomProps } from "./BottomAxis";
 import { AxisLeftProps } from "./LeftAxis";
+import "./Bars.css";
 
 interface BarsProps {
   data: FilteredObject[];
@@ -21,6 +22,7 @@ export function Bars({ data, height, scaleX, scaleY }: BarsProps) {
           height={height - scaleY(demand_qty)}
           fill="#58508d"
           stroke="white"
+          className={"bar"}
         />
       ))}
     </>

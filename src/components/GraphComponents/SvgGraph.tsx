@@ -2,6 +2,7 @@ import { scaleBand, scaleLinear } from "d3";
 import React, { FC } from "react";
 import { FilteredObject } from "../DataView";
 import { Bars } from "./Bars";
+
 import { AxisBottom } from "./BottomAxis";
 import { GraphPlots } from "./GraphPlots";
 import { AxisLeft } from "./LeftAxis";
@@ -22,6 +23,7 @@ const SvgGraph: FC<IProps> = ({ data }) => {
   const scaleY = scaleLinear()
     .domain([0, Math.max(...data.map(({ demand_qty }) => demand_qty))])
     .range([height, 0]);
+
   return (
     <svg
       width={width + margin.left + margin.right}
@@ -31,8 +33,7 @@ const SvgGraph: FC<IProps> = ({ data }) => {
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
         <AxisLeft scale={scaleY} />
-        <Bars data={data} height={height} scaleX={scaleX} scaleY={scaleY} />
-
+        <Bars data={data} height={height} scaleX={scaleX} scaleY={scaleY} />s
         {data.map(({ index, target_date, delivery_qty, recommendation }) => (
           <>
             <GraphPlots

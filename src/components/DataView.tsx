@@ -1,33 +1,11 @@
-import React, { useState, useMemo } from "react";
-import { FC } from "react";
+import React, { useState, useMemo, useContext } from "react";
+import { BakeryContext } from "src/Context/BakeryContext";
 import { combineObjectsByMatchingKeys } from "../helpers/combineArrays";
 import { groupAndSumByProperty } from "../helpers/groupAndSumProperty";
 import Frame from "./Frame";
 import Graph from "./GraphComponents/Graph";
 import Selector from "./Selector";
 import Table from "./TableComponents/Table";
-
-export interface DeliveryObject {
-  target_date: string;
-  id_store: number;
-  id_product: number;
-  delivery_qty?: number;
-}
-
-export interface RecomendationObject {
-  target_date: string;
-  id_store: number;
-  id_product: number;
-  recommendation: number;
-}
-
-export interface SalesObject {
-  demand_qty: number;
-  demand_value: number;
-  id_product: number;
-  id_store: number;
-  target_date: string;
-}
 
 export interface FilteredObject {
   index: number;
@@ -40,13 +18,9 @@ export interface FilteredObject {
   recommendation: number;
 }
 
-interface IProps {
-  deliveries: DeliveryObject[];
-  recommendations: RecomendationObject[];
-  sales: SalesObject[];
-}
+const DataView = () => {
+  const { deliveries, recommendations, sales } = useContext(BakeryContext);
 
-const DataView: FC<IProps> = ({ deliveries, recommendations, sales }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectStore, setSelectStore] = useState("");
   const [selectProduct, setSelectProduct] = useState("");

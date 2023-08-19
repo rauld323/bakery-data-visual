@@ -1,21 +1,16 @@
 import "./App.css";
-import React, { createContext } from "react";
-import DataView from "./components/DataView";
-import deliveries from "../src/data/deliveries.json";
-import recommendations from "../src/data/recommendations.json";
-import sales from "../src/data/sales.json";
-
-export const BakeryContext = createContext({});
+import React from "react";
+import DataView from "./Components/DataView";
+import deliveries from "../src/Data/deliveries.json";
+import recommendations from "../src/Data/recommendations.json";
+import sales from "../src/Data/sales.json";
+import { BakeryContext } from "./Context/BakeryContext";
 
 function App() {
   return (
     <div className="App">
       <BakeryContext.Provider value={{ deliveries, recommendations, sales }}>
-        <DataView
-          deliveries={deliveries}
-          recommendations={recommendations}
-          sales={sales}
-        />
+        <DataView />
       </BakeryContext.Provider>
     </div>
   );

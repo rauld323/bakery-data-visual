@@ -1,8 +1,24 @@
-import {
-  DeliveryObject,
-  RecomendationObject,
-  SalesObject,
-} from "../components/DataView";
+interface DeliveryObject {
+  target_date: string;
+  id_store: number;
+  id_product: number;
+  delivery_qty?: number;
+}
+
+interface RecomendationObject {
+  target_date: string;
+  id_store: number;
+  id_product: number;
+  recommendation: number;
+}
+
+interface SalesObject {
+  demand_qty: number;
+  demand_value: number;
+  id_product: number;
+  id_store: number;
+  target_date: string;
+}
 
 export function combineObjectsByMatchingKeys(
   arr1: DeliveryObject[],
