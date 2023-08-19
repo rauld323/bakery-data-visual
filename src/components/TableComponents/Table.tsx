@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { getProductNames } from "../enums/productNames";
-import { getStoreName } from "../enums/storeNames";
-import { findClosestNumber } from "../helpers/findClosestNumber";
 import { format, parse } from "date-fns";
 import "./Table.css";
-import Button from "./Button";
-import { FilteredObject } from "./DataView";
+import { getProductNames } from "../../enums/productNames";
+import { getStoreName } from "../../enums/storeNames";
+import { findClosestNumber } from "../../helpers/findClosestNumber";
+import Button from "../Button";
+import { FilteredObject } from "../DataView";
+import NoDataMessage from "../NoDataMessage";
 
 interface IProps {
   filteredDeliveries: FilteredObject[];
@@ -13,17 +14,9 @@ interface IProps {
 }
 
 const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
-  const noDataMessage = () => {
-    return (
-      <div style={{ paddingTop: "80px" }}>
-        <h1>Sorry, there is no data for that query!</h1>
-      </div>
-    );
-  };
-
   const displayTableData = () => {
-    return filteredDeliveries.map((item) => (
-      <div className="table-row">
+    return filteredDeliveries.map((item, index) => (
+      <div key={index} className="table-row">
         <div className="table-cell">{getStoreName(item.id_store)}</div>
         <div className="table-cell">{getProductNames(item.id_product)}</div>
         <div className="table-cell">
@@ -70,7 +63,11 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
           <div className="table-cell">Forecast Tendency</div>
         </div>
 
-        {filteredDeliveries.length !== 0 ? displayTableData() : noDataMessage()}
+        {filteredDeliveries.length !== 0 ? (
+          displayTableData()
+        ) : (
+          <NoDataMessage />
+        )}
       </div>
       <Button onClickAction={toggleComponent} text={"Graph"} />
     </>

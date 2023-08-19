@@ -3,10 +3,9 @@ import { FC } from "react";
 import { combineObjectsByMatchingKeys } from "../helpers/combineArrays";
 import { groupAndSumByProperty } from "../helpers/groupAndSumProperty";
 import Frame from "./Frame";
-import Graph from "./Graph";
+import Graph from "./GraphComponents/Graph";
 import Selector from "./Selector";
-import Table from "./Table";
-import "./Table.css";
+import Table from "./TableComponents/Table";
 
 export interface DeliveryObject {
   target_date: string;
@@ -41,7 +40,7 @@ export interface FilteredObject {
   recommendation: number;
 }
 
-export interface IProps {
+interface IProps {
   deliveries: DeliveryObject[];
   recommendations: RecomendationObject[];
   sales: SalesObject[];
