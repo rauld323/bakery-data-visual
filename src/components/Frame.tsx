@@ -13,7 +13,6 @@ const Frame: FC<IProps> = ({ children }) => {
         justifyContent: "center",
         borderRadius: "10px",
         border: "1px solid black",
-        alignItems: "center",
         flexDirection: "column",
       }}
     >

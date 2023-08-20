@@ -4,9 +4,9 @@ import "./Table.css";
 import { getProductNames } from "../../Enums/productNames";
 import { getStoreName } from "../../Enums/storeNames";
 import { findClosestNumber } from "../../helpers/findClosestNumber";
-import Button from "../Button";
-import { FilteredObject } from "../DataView";
-import NoDataMessage from "../NoDataMessage";
+import Button from "../../Components/Button";
+import { FilteredObject } from "../../Components/DataView";
+import NoDataMessage from "../../Components/NoDataMessage";
 
 interface IProps {
   filteredDeliveries: FilteredObject[];
@@ -17,26 +17,26 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
   const displayTableData = () => {
     return filteredDeliveries.map((item, index) => (
       <div key={index} className="table-row">
-        <div className="table-cell">{getStoreName(item.id_store)}</div>
-        <div className="table-cell">{getProductNames(item.id_product)}</div>
-        <div className="table-cell">
+        <tr className="table-cell">{getStoreName(item.id_store)}</tr>
+        <tr className="table-cell">{getProductNames(item.id_product)}</tr>
+        <tr className="table-cell">
           {format(
             parse(item.target_date, "yyyy-MM-dd", new Date()),
             "yy-MM-dd"
           )}
-        </div>
-        <div className="table-cell">
+        </tr>
+        <tr className="table-cell">
           {item.recommendation > 0 ? item.recommendation : 0}
-        </div>
-        <div className="table-cell">{item.delivery_qty}</div>
-        <div className="table-cell">{item.demand_qty}</div>
-        <div className="table-cell">
+        </tr>
+        <tr className="table-cell">{item.delivery_qty}</tr>
+        <tr className="table-cell">{item.demand_qty}</tr>
+        <tr className="table-cell">
           {findClosestNumber(
             item.delivery_qty,
             item.recommendation,
             item.demand_qty
           )}
-        </div>
+        </tr>
       </div>
     ));
   };
@@ -44,7 +44,6 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
   return (
     <>
       <div
-        className="table"
         style={{
           margin: "5% 5% 0",
           overflow: "auto",
@@ -53,21 +52,23 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
           borderRadius: "5px",
         }}
       >
-        <div className="table-row sticky-row">
-          <div className="table-cell">Store</div>
-          <div className="table-cell">Product</div>
-          <div className="table-cell">Date </div>
-          <div className="table-cell">Recomm...</div>
-          <div className="table-cell">Delivery</div>
-          <div className="table-cell">Demand</div>
-          <div className="table-cell">Forecast Tendency</div>
-        </div>
+        <table className="table">
+          <th className="table-row sticky-row">
+            <tr className="table-cell">Store</tr>
+            <tr className="table-cell">Product</tr>
+            <tr className="table-cell">Date </tr>
+            <tr className="table-cell">Recomm...</tr>
+            <tr className="table-cell">Delivery</tr>
+            <tr className="table-cell">Demand</tr>
+            <tr className="table-cell">Forecast Tendency</tr>
+          </th>
 
-        {filteredDeliveries.length !== 0 ? (
-          displayTableData()
-        ) : (
-          <NoDataMessage />
-        )}
+          {filteredDeliveries.length !== 0 ? (
+            displayTableData()
+          ) : (
+            <NoDataMessage />
+          )}
+        </table>
       </div>
       <Button onClickAction={toggleComponent} text={"Graph"} />
     </>

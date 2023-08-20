@@ -7,7 +7,11 @@ interface IProps {
 }
 
 const Button: FC<IProps> = ({ onClickAction, text }) => {
-  return <button onClick={onClickAction}>{text}</button>;
+  return (
+    <button style={{ alignSelf: "center" }} onClick={onClickAction}>
+      {text}
+    </button>
+  );
 };
 
 export default Button;

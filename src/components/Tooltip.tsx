@@ -3,8 +3,9 @@ import { FC, useState } from "react";
 interface IProps {
   valueKey?: string;
   value?: string | number;
-  children?: any;
+  children: any[] | any;
   delay?: number;
+  content: any;
 }
 
 const Tooltip: FC<IProps> = ({
@@ -12,6 +13,7 @@ const Tooltip: FC<IProps> = ({
   valueKey = "Delivery",
   value = "100",
   delay,
+  content,
 }) => {
   let timeout: string | number | NodeJS.Timeout | undefined;
   const [active, setActive] = useState(false);
@@ -30,13 +32,31 @@ const Tooltip: FC<IProps> = ({
   return (
     <div
       className="Tooltip-Wrapper"
-      // When to show the tooltip
       onMouseEnter={showTip}
       onMouseLeave={hideTip}
-      style={{ backgroundColor: "green" }}
     >
       {children}
-      {active && <div>{value}</div>}
+      {active && (
+        <div
+          className={"TooltipTip"}
+          style={{
+            position: "absolute",
+            borderRadius: "4px",
+            // left: "50%",
+            // transform: translateX("-50%"),
+            padding: "6px",
+            // // color: var(--tooltip-text-color),
+            // // background: var(--tooltip-background-color)
+            fontSize: "14px",
+            // font-family: sans-serif,
+            lineHeight: 1,
+            zIndex: "100",
+            // white-space: nowrap
+          }}
+        >
+          {content}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { isEmpty } from "../../helpers/isEmpty";
-import { AxisBottomProps } from "./BottomAxis";
-import { AxisLeftProps } from "./LeftAxis";
+import { AxisBottomProps } from "../../Components/GraphComponents/BottomAxis";
+import { AxisLeftProps } from "../../Components/GraphComponents/LeftAxis";
 
 interface IProps {
   height: number;

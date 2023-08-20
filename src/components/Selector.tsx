@@ -33,8 +33,8 @@ const Selector: FC<IProps> = ({ value, uniqueItem, label, onChange }) => {
         }}
       >
         <option value="">{`All ${label}`}</option>
-        {uniqueItem.map((item) => (
-          <option key={item}>{item}</option>
+        {uniqueItem.map((item, index) => (
+          <option key={index}>{item}</option>
         ))}
       </select>
     </div>

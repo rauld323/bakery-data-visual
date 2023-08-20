@@ -27,6 +27,7 @@ const Legend = () => {
           display: "flex",
           alignItems: "flex-start",
           flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
         <div>Delivery</div>

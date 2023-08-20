@@ -2,22 +2,26 @@ import { scaleBand, scaleLinear } from "d3";
 import React, { FC } from "react";
 import { FilteredObject } from "../DataView";
 import { Bars } from "./Bars";
-
-import { AxisBottom } from "./BottomAxis";
-import { GraphPlots } from "./GraphPlots";
-import { AxisLeft } from "./LeftAxis";
+import { AxisBottom } from "../../Components/GraphComponents/BottomAxis";
+import { GraphPlots } from "../../Components/GraphComponents/GraphPlots";
+import { AxisLeft } from "../../Components/GraphComponents/LeftAxis";
 
 interface IProps {
   data: FilteredObject[];
 }
 
 const SvgGraph: FC<IProps> = ({ data }) => {
-  const margin = { top: 20, right: 0, bottom: 20, left: 30 };
+  const margin = {
+    top: data.length === 1 ? 150 : 50,
+    right: 0,
+    bottom: 20,
+    left: 30,
+  };
   const width = (data.length > 1 ? 2000 : 200) - margin.left - margin.right;
   const height = 500 - margin.top - margin.bottom;
 
   const scaleX = scaleBand()
-    .domain(data.map(({ target_date, index }) => target_date))
+    .domain(data.map(({ target_date }) => target_date))
     .range([0, width]);
 
   const scaleY = scaleLinear()
