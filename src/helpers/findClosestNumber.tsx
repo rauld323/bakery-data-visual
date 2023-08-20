@@ -1,3 +1,4 @@
+import Tooltip from "src/Components/Tooltip";
 import { isEmpty, returnZeroIfEmpty } from "./isEmpty";
 
 export function findClosestNumber(
@@ -11,10 +12,27 @@ export function findClosestNumber(
   );
 
   if (isEmpty(recommendation)) {
-    return "N/A";
+    return (
+      <Tooltip content={"Recommnedation not provided"}>
+        <div>N/A</div>
+      </Tooltip>
+    );
   } else if (deliveryDistance < recommendationDistance) {
-    return "Improved";
+    return (
+      <Tooltip content={"Delivery quantity is closer to the demand."}>
+        <div>Improved</div>
+      </Tooltip>
+    );
   } else if (deliveryDistance > recommendationDistance) {
-    return "Deteriorated";
-  } else return "Same";
+    return (
+      <Tooltip content={"Order Recommendation is closer to actual demand."}>
+        <div>Deteriorated</div>
+      </Tooltip>
+    );
+  } else
+    return (
+      <Tooltip content={"Recommendation and Delivery values are the same"}>
+        <div>Same</div>
+      </Tooltip>
+    );
 }
