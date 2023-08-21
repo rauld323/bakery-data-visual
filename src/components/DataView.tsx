@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useContext } from "react";
 import { BakeryContext } from "src/Context/BakeryContext";
+import { getProductNames } from "src/Enums/productNames";
+import { getStoreName } from "src/Enums/storeNames";
 import { combineObjectsByMatchingKeys } from "../helpers/combineArrays";
 import { groupAndSumByProperty } from "../helpers/groupAndSumProperty";
 import Frame from "./Frame";
@@ -48,14 +50,22 @@ const DataView = () => {
 
   const uniqueStores = useMemo(
     () =>
-      Array.from(new Set(combinedFilteredData.map((store) => store.id_store))),
+      Array.from(
+        new Set(
+          combinedFilteredData.map((store) => getStoreName(store.id_store))
+        )
+      ),
     [combinedFilteredData]
   );
 
   const uniqueProducts = useMemo(
     () =>
       Array.from(
-        new Set(combinedFilteredData.map((product) => product.id_product))
+        new Set(
+          combinedFilteredData.map((product) =>
+            getProductNames(product.id_product)
+          )
+        )
       ),
     [combinedFilteredData]
   );
@@ -64,10 +74,10 @@ const DataView = () => {
     const matchesDate = !selectedDate || item.target_date === selectedDate;
 
     const matchesStore =
-      !selectStore || item.id_store === parseInt(selectStore);
+      !selectStore || getStoreName(item.id_store) === selectStore;
 
     const matchesProduct =
-      !selectProduct || item.id_product === parseInt(selectProduct);
+      !selectProduct || getProductNames(item.id_product) === selectProduct;
 
     return matchesStore && matchesProduct && matchesDate;
   });

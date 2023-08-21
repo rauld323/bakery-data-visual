@@ -1,14 +1,8 @@
-enum StoreName {
-  STORE_THREE = 100790000,
-  STORE_SIX = 100790001,
-  STORE_NINE = 100790002,
-}
-
-export function getStoreName(storeName: StoreName): string | number {
+export function getStoreName(storeName: string | number) {
   switch (storeName) {
-    case StoreName.STORE_THREE:
+    case 100790000:
       return "Three";
-    case StoreName.STORE_SIX:
+    case 100790001:
       return "Six";
     default:
       return "Nine";

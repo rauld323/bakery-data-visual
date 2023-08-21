@@ -8,7 +8,6 @@ interface IProps {
 }
 
 const Selector: FC<IProps> = ({ value, uniqueItem, label, onChange }) => {
-  console.log(uniqueItem, "rer");
   return (
     <div
       style={{
