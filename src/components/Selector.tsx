@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const Selector: FC<IProps> = ({ value, uniqueItem, label, onChange }) => {
+  console.log(uniqueItem, "rer");
   return (
     <div
       style={{
@@ -34,7 +35,9 @@ const Selector: FC<IProps> = ({ value, uniqueItem, label, onChange }) => {
       >
         <option value="">{`All ${label}`}</option>
         {uniqueItem.map((item, index) => (
-          <option key={index}>{item}</option>
+          <option key={index} value={item}>
+            {item}
+          </option>
         ))}
       </select>
     </div>
