@@ -13,7 +13,7 @@ export function findClosestNumber(
 
   if (isEmpty(recommendation)) {
     return (
-      <Tooltip content={"Recommnedation not provided"}>
+      <Tooltip content={"Recommendation is not provided."}>
         <div>N/A</div>
       </Tooltip>
     );
@@ -31,7 +31,7 @@ export function findClosestNumber(
     );
   } else
     return (
-      <Tooltip content={"Recommendation and Delivery values are the same"}>
+      <Tooltip content={"Recommendation and Delivery values are the same."}>
         <div>Same</div>
       </Tooltip>
     );

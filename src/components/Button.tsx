@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "./Button.css";
+import styled from "styled-components";
 
 interface IProps {
   onClickAction?: () => void;
@@ -8,10 +8,29 @@ interface IProps {
 
 const Button: FC<IProps> = ({ onClickAction, text }) => {
   return (
-    <button style={{ alignSelf: "center" }} onClick={onClickAction}>
+    <StyledButton style={{ alignSelf: "center" }} onClick={onClickAction}>
       {text}
-    </button>
+    </StyledButton>
   );
 };
 
 export default Button;
+
+const StyledButton = styled.button`
+  border: none;
+  height: 50px;
+  width: 200px;
+  background-color: #22313e;
+  cursor: pointer;
+  font-size: 1.3em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 30px 0;
+  color: white;
+
+  &:hover {
+    background-color: #009fb2;
+    color: white;
+  }
+`;

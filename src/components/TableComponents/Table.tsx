@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { format, parse } from "date-fns";
-import "./Table.css";
 import { getProductNames } from "../../Enums/productNames";
 import { getStoreName } from "../../Enums/storeNames";
 import { findClosestNumber } from "../../helpers/findClosestNumber";
 import Button from "../../Components/Button";
 import { FilteredObject } from "../../Components/DataView";
 import NoDataMessage from "../../Components/NoDataMessage";
+import styled from "styled-components";
 
 interface IProps {
   filteredDeliveries: FilteredObject[];
@@ -16,28 +16,28 @@ interface IProps {
 const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
   const displayTableData = () => {
     return filteredDeliveries.map((item, index) => (
-      <div key={index} className="table-row">
-        <tr className="table-cell">{getStoreName(item.id_store)}</tr>
-        <tr className="table-cell">{getProductNames(item.id_product)}</tr>
-        <tr className="table-cell">
+      <StyledTableRow key={index}>
+        <StyledTableCell>{getStoreName(item.id_store)}</StyledTableCell>
+        <StyledTableCell>{getProductNames(item.id_product)}</StyledTableCell>
+        <StyledTableCell>
           {format(
             parse(item.target_date, "yyyy-MM-dd", new Date()),
             "yy-MM-dd"
           )}
-        </tr>
-        <tr className="table-cell">
+        </StyledTableCell>
+        <StyledTableCell>
           {item.recommendation > 0 ? item.recommendation : 0}
-        </tr>
-        <tr className="table-cell">{item.delivery_qty}</tr>
-        <tr className="table-cell">{item.demand_qty}</tr>
-        <tr className="table-cell">
+        </StyledTableCell>
+        <StyledTableCell>{item.delivery_qty}</StyledTableCell>
+        <StyledTableCell>{item.demand_qty}</StyledTableCell>
+        <StyledTableCell>
           {findClosestNumber(
             item.delivery_qty,
             item.recommendation,
             item.demand_qty
           )}
-        </tr>
-      </div>
+        </StyledTableCell>
+      </StyledTableRow>
     ));
   };
 
@@ -52,16 +52,16 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
           borderRadius: "5px",
         }}
       >
-        <table className="table">
-          <th className="table-row sticky-row">
-            <tr className="table-cell">Store</tr>
-            <tr className="table-cell">Product</tr>
-            <tr className="table-cell">Date </tr>
-            <tr className="table-cell">Recomm...</tr>
-            <tr className="table-cell">Delivery</tr>
-            <tr className="table-cell">Demand</tr>
-            <tr className="table-cell">Forecast Tendency</tr>
-          </th>
+        <table>
+          <StyledTableHeader>
+            <StyledTableCell>Store</StyledTableCell>
+            <StyledTableCell>Product</StyledTableCell>
+            <StyledTableCell>Date </StyledTableCell>
+            <StyledTableCell>Recomm...</StyledTableCell>
+            <StyledTableCell>Delivery</StyledTableCell>
+            <StyledTableCell>Demand</StyledTableCell>
+            <StyledTableCell>Forecast Tendency</StyledTableCell>
+          </StyledTableHeader>
 
           {filteredDeliveries.length !== 0 ? (
             displayTableData()
@@ -76,3 +76,24 @@ const Table: FC<IProps> = ({ filteredDeliveries, toggleComponent }) => {
 };
 
 export default Table;
+
+const StyledTableHeader = styled.th`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+`;
+
+const StyledTableRow = styled.tr`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+`;
+
+const StyledTableCell = styled.tr`
+  background-color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+`;

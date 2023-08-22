@@ -112,7 +112,7 @@ const DataView = () => {
           />
 
           <Selector
-            label={"Product"}
+            label={"Products"}
             value={selectProduct}
             onChange={(e) => setSelectProduct(e.target.value)}
             uniqueItem={uniqueProducts}

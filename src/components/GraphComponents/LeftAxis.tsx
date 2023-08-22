@@ -7,7 +7,6 @@ export interface AxisLeftProps {
 
 export function AxisLeft({ scale }: AxisLeftProps) {
   const ref = useRef<SVGGElement>(null);
-
   useEffect(() => {
     if (ref.current) {
       select(ref.current).call(axisLeft(scale));

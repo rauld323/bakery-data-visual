@@ -20,12 +20,25 @@ const SvgGraph: FC<IProps> = ({ data }) => {
   const width = (data.length > 1 ? 2000 : 200) - margin.left - margin.right;
   const height = 500 - margin.top - margin.bottom;
 
+  function test(delivery_qty: number, recommendation: number) {
+    if (delivery_qty > recommendation) {
+      return delivery_qty;
+    } else return recommendation;
+  }
+
   const scaleX = scaleBand()
     .domain(data.map(({ target_date }) => target_date))
     .range([0, width]);
 
   const scaleY = scaleLinear()
-    .domain([0, Math.max(...data.map(({ demand_qty }) => demand_qty))])
+    .domain([
+      0,
+      Math.max(
+        ...data.map(({ delivery_qty, recommendation }) =>
+          test(delivery_qty, recommendation)
+        )
+      ),
+    ])
     .range([height, 0]);
 
   return (

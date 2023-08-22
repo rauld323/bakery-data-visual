@@ -1,7 +1,7 @@
 import { FilteredObject } from "../DataView";
 import { AxisBottomProps } from "./BottomAxis";
 import { AxisLeftProps } from "./LeftAxis";
-import "./Bars.css";
+import styled from "styled-components";
 
 interface BarsProps {
   data: FilteredObject[];
@@ -14,7 +14,7 @@ export function Bars({ data, height, scaleX, scaleY }: BarsProps) {
   return (
     <>
       {data.map(({ index, target_date, demand_qty }) => (
-        <rect
+        <StyledBar
           key={index}
           x={scaleX(target_date)}
           y={scaleY(demand_qty)}
@@ -22,9 +22,14 @@ export function Bars({ data, height, scaleX, scaleY }: BarsProps) {
           height={height - scaleY(demand_qty)}
           fill="#58508d"
           stroke="white"
-          className={"bar"}
         />
       ))}
     </>
   );
 }
+
+const StyledBar = styled.rect`
+  &:hover {
+    fill: rgb(188, 90, 218);
+  }
+`;
