@@ -3,6 +3,7 @@ export function groupAndSumByProperty(arr) {
 
   arr.forEach((item) => {
     const target_date = item.target_date;
+
     if (!grouped[target_date]) {
       grouped[target_date] = {
         target_date: target_date,

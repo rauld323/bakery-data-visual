@@ -91,9 +91,13 @@ const StyledTableRow = styled.tr`
   grid-template-columns: repeat(7, 1fr);
 `;
 
-const StyledTableCell = styled.tr`
+const StyledTableCell = styled.td`
   background-color: #ffffff;
   text-align: center;
   padding: 10px;
   border: 1px solid #ddd;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
